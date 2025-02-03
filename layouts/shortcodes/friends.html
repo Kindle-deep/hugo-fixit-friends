@@ -1,0 +1,21 @@
+{{ if .IsNamedParams }}
+    {{- $src := .Get "avatar" -}}
+    {{- $small := .Get "avatar_small" | default $src -}}
+    {{- $large := .Get "avatar_large" | default $src -}}
+    <div class="flink" id="article-container">
+      <div class="friend-list-div" >
+        <div class="friend-div">
+            <a target="_blank" href={{ .Get "link"  | safeURL }} title={{ .Get "name" }} >
+                <img class="lazyload"
+                     src="https://cdn.jsdmirror.com/gh/Kindle-deep/picx-images-hosting@master/loading.svg"
+                     data-src={{ $src | safeURL }}
+                     alt={{ .Get "name" }}
+                     data-sizes="auto"
+                     data-srcset="{{ $small | safeURL }}, {{ $src | safeURL }} 1.5x, {{ $large | safeURL }} 2x" />
+                <span class="friend-name">{{ .Get "name" }}</span>
+                <span class="friend-desc">{{ .Get "description" }}</span>
+            </a>
+        </div>
+      </div>
+    </div>
+{{ end }}
